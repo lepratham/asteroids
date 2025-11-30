@@ -25,7 +25,6 @@ def main():
 
     asteroid_field = AsteroidField()
     player_1 = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2, cooldown=0)
-
     dt = 0
 
     while True:
@@ -46,6 +45,12 @@ def main():
                 log_event("player_hit")
                 print("Game Over!")
                 sys.exit()
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    asteroid.split()
 
 
 if __name__ == "__main__":
